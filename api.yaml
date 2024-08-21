@@ -1,0 +1,131 @@
+# Item Management API
+
+This API allows you to manage a list of items.
+
+## Endpoints
+
+### Get Items
+
+**Endpoint:** `GET /items/`
+
+**Description:** Retrieve a list of items, with optional filtering and pagination.
+
+**Parameters:**
+
+- `skip` (optional, integer): Number of items to skip (for pagination). Default is 0.
+- `limit` (optional, integer): Maximum number of items to return. Default is 10, and the maximum is 100.
+- `name` (optional, string): Filter items by name.
+
+**Responses:**
+
+- `200 OK`: Returns a list of `Item` objects.
+
+**Example Request:**
+
+```
+Copy
+GET /items/?skip=10&limit=20&name=shirt
+
+```
+
+**Example Response:**
+
+```json
+json
+Copy
+[
+  {
+    "id": 1,
+    "name": "Shirt",
+    "description": "A comfortable cotton shirt",
+    "price": 19.99
+  },
+  {
+    "id": 4,
+    "name": "Shirt (XL)",
+    "description": "A larger cotton shirt",
+    "price": 21.99
+  }
+]
+
+```
+
+### Get Item
+
+**Endpoint:** `GET /items/{item_id}`
+
+**Description:** Retrieve a single item by its ID.
+
+**Parameters:**
+
+- `item_id` (required, integer): The ID of the item to retrieve.
+
+**Responses:**
+
+- `200 OK`: Returns an `Item` object.
+- `404 Not Found`: If the item is not found.
+
+**Example Request:**
+
+```
+Copy
+GET /items/2
+
+```
+
+**Example Response:**
+
+```json
+json
+Copy
+{
+  "id": 2,
+  "name": "Pants",
+  "description": "A pair of comfortable pants",
+  "price": 29.99
+}
+
+```
+
+### Create Item
+
+**Endpoint:** `POST /items/`
+
+**Description:** Create a new item.
+
+**Request Body:**
+
+- `name` (required, string): The name of the item.
+- `description` (required, string): The description of the item.
+- `price` (required, float): The price of the item.
+
+**Responses:**
+
+- `201 Created`: Returns the created `Item` object.
+
+**Example Request:**
+
+```json
+json
+Copy
+{
+  "name": "Jacket",
+  "description": "A warm winter jacket",
+  "price": 49.99
+}
+
+```
+
+**Example Response:**
+
+```json
+json
+Copy
+{
+  "id": 5,
+  "name": "Jacket",
+  "description": "A warm winter jacket",
+  "price": 49.99
+}
+
+```
